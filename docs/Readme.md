@@ -1,4 +1,6 @@
-﻿# Hello world
+﻿
+
+# Hello history
 # history-api
 window自带url history模式，应用探索
 
