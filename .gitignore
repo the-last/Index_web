@@ -1,0 +1,8 @@
+node_modules
+build
+*.log
+.idea
+.DS_Store
+mockup/
+.vscode/
+.history/
