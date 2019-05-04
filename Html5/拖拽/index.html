@@ -15,9 +15,13 @@
     <div>
         <div class="wrapper">
             <div class="col1 col">
-                <div class="item" id="item1" draggable="true"><span><div><span>hahahha</span> item1</div></span></div>
+                <div class="item" id="item1" draggable="true">item1</div>
                 <div class="item" id="item2" draggable="true">item2</div>
-                <div class="item" id="item39999" draggable="true">item3</div>
+                <div class="item" id="item3" draggable="true">item3</div>
+                <!-- <image
+                    class="item" id="item4" draggable="true"
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556941843348&di=9223c676ecb80fdb51ab0e2e13dee931&imgtype=0&src=http%3A%2F%2Fstatic1.bigstockphoto.com%2Fthumbs%2F6%2F7%2F1%2Flarge1500%2F176214469.jpg"
+                /> -->
             </div>
             <div class="col2 col"></div>
             <div class="col3 col"></div>
@@ -28,29 +32,32 @@
 <script>
     let cols = document.getElementsByClassName('col');
     for (let col of cols) {
-        col.ondragenter = e => { 
-            // console.log('放置元素 ondragenter', '<' + e.dataTransfer.getData('item') + '>'); 
+        col.ondragenter = function(e) { 
+            console.log('---  ondragenter ---');
         }
-        col.ondragover = e => {
-            e.preventDefault();   // 不阻止 后面不会触发ondrag
-            // console.log('放置元素 ondragover', '<' + e.dataTransfer.getData('item') + '>');
+        col.ondragover = function(e) {
+            console.log('---  ondragover  ---');
+            e.preventDefault();
+            e.dataTransfer.dropEffect = "copy"
+            // 此处copy无效 需要在drop事件中复制新的节点
         }
-        col.ondragleave = e => { 
-            // console.log('放置元素 ondragleave', '<' + e.dataTransfer.getData('item') + '>'); 
+        col.ondragleave = function(e) { 
+            console.log('---  ondragleave ---');
         }
         col.ondrop = function(e) {
-            console.log('放置元素 ondrop',e.dataTransfer.getData, e.dataTransfer.getData('henhao'));
-            this.append(document.getElementById(e.dataTransfer.getData('henhao')));
+            
+            let bedraged = document.getElementById(e.dataTransfer.getData('item')).cloneNode(true);
+            this.append(bedraged);
         }
     }
     let items = document.getElementsByClassName('item');
     for (let item of items) {
-        item.ondragstart = e => {
-            console.log('拖拽元素 ondragstart');
-            e.dataTransfer.setData('henhao', e.target.id);  // 以ID区分拖拽的部分
+        item.ondragstart = function(e) {
+            e.dataTransfer.effectAllowed = "copy";
+            e.dataTransfer.setData('item', e.target.id);  // 记录被拖拽的节点
         }
-        item.ondragend = e => {
-          console.log('拖拽元素 ondragend');
+        item.ondragend = function(e) {
+            console.log('-- ondragend --拖拽结束');
         }
     }
 </script>
