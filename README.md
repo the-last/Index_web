@@ -18,6 +18,7 @@
 * 正则
 * 算法
 * 链表
+* async/await
 
 #### Webpack
 * 模块
