@@ -28,3 +28,5 @@ console.log(rowLeft, rowRight, '同时都被修改为最新的assign值');
 // lineHeight: '50px',
 // color: 'rgba(0,0,0,.6)'
 // Object.assign 方法是对已有属性的修改会覆盖，新增但不能删除。
+// 
+// 这可以作为一种对象赋值的高效方式！
