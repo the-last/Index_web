@@ -34,7 +34,7 @@ cookie在服务端是key/value的形式，客户端也是</br>
 | expires | 过期时间 | 单位为ms，设置cookie过期相当于删除 |
 | path | 作用路径 | 用路径区分cookie作用范围 |
 | size | 单个cookie大小 |  |
-| http | httponly属性 | cookie是否可被操作 |
+| http | httponly属性 | cookie是否可被浏览器写入 |
 | secure | 安全性 | 是否向服务器发送cookie，为true时https才发送cookie |
 | samesite | 站点防护csrf攻击 | 可选值strict或lax |
 
