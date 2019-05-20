@@ -42,9 +42,9 @@
 * 生命周期
 * key
 * refs
-* css modules
+* css-in-js
 * 高阶组件
-* hooks
+* Hooks
 * 事件
 * 组件通信
 
