@@ -175,4 +175,163 @@ effect 每次都跟新这个设计实际上会减少很多bug. <br />
 使用Effect就不会有这种遗漏更新的bug出现，因为Effect默认是会处理。<br />
 在调用一个Effect之前，清理上一个Effect，保证了更新
 
+### 如何跳过useEffect 进行性能优化 ？
+一般在class组件中 DidUpdate周期函数中做判断，判断更新是否是必要的。
+```
+componentDidUpdate(prevProps, prevState) {
+  if (prevState.count !== this.state.count) {
+    document.title = `点击${this.state.count} 次`;
+  }
+}
+```
+useEffect已经内置了这个判断，修改下useEffect的用法即可，写法如下 <br />
+```
+useEffect(() => {
+  document.title = `点击${count} 次`;
+}, [count]);
 
+// 此时，如果count不发生变化不会执行useEffect函数。 
+// 对于有清除操作的effect，同样适用。
+```
+
+## useContext or  Context Hook
+接受 Context 作为参数，其他不能接受。
+```
+const value = useContext(MyContext);
+useContext(MyContext);            //正确
+useContext(MyContext.Consumer);   //错误
+useContext(MyContext.Provider);   //错误
+```
+useContext(MyContext) 只是让你能够读取 context 的值以及订阅 context 的变化。<br />
+仍然需要上层组件提供 <MyContext.Provider> 给下层组件提供 context。
+
+## useReducer or Reducer Hook
+useState 的替代方案
+```
+const [state, dispatch] = useReducer(reducer, initialArg, init);
+```
+写法(state, action) => newState 的 reducer，并返回当前的state和dispatch配套方法。<br />
+1，state比较复杂的情况<br />
+2，state依赖上一个state值<br />
+可以对触发**深更新**的组件做优化，向子组件传递dispatch而不是 回调函数。
+
+
+## Hooks 规则
+hooks 本质上也是js函数，需要满足以下两个规则，可以参考linter插件 [hooks-linter](https://www.npmjs.com/package/eslint-plugin-react-hooks, 'hooks使用规范')<br />
+* 只在最顶层使用Hook
+不在循环，嵌套函数中使用Hook。能确保 Hook 在每一次渲染中都按照同样的顺序被调用<br />
+保证在多次的useState和useEffect之间保持hook状态的正确性。
+```
+// 违反规则的写法，这个hook未在最顶层，后面会影响Hook的调用顺序导致bug。
+if (name !== '') {
+    useEffect(function persistForm () {
+        localStorage.setItem('formData', name);
+    });
+}
+// 正确的写法
+useEffect(function persistForm() {
+    // 👍 判断条件写在 effect 中
+    if (name !== '') {
+        localStorage.setItem('formData', name);
+    }
+});
+```
+
+* 只在React函数中调用Hook
+不要在普通的js函数中调用Hook<br />
+可以在自定义Hook中调用其他Hook，可以在函数组件中调用Hook。
+
+* React 是如何知道useState对应的是哪个Hook ？
+React靠的是调用的顺序，调用顺序相同，渲染结果一样。
+
+
+## 自定义Hooks
+##### 通过自定义的Hook，可以将组建逻辑提取到可重用的函数中。
+##### hooks本身就是函数。
+
+### 声明自定义Hook
+提取自定义Hook，名称以’use‘开头，函数内部可以调用其他的Hook。<br />
+像一个正常的函数，可以定义它的返回值，或者其他内部操作。<br />
+```
+import React, { useState, useEffect } from 'react';
+// 自定义hook，传入用户ID作为参数，检查在线状态。
+function useFriendStatus(friendID) {
+    const [isOnline, setIsOnline] = useState(null);
+
+    useEffect(() => {
+        function handleStatusChange(status) {
+            setIsOnline(status.isOnline);
+        }
+        ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
+
+        return () => {
+            ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
+        };
+    });
+    return isOnline;
+}
+```
+
+### 使用自定义Hook
+使用hook方法的实现。
+```
+function FriendListItem(props) {
+    const [isOnline, setIsOnline] = useState(null);
+
+    useEffect(() => {
+        function handleStatusChange(status) {
+            setIsOnline(status.isOnline);
+        }
+
+        ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+        return () => {
+            ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+        };
+    });
+
+    return (
+        <li style={{ color: isOnline ? 'green' : 'black' }}>
+            {props.friend.name}
+        </li>
+    );
+}
+```
+自定义hook提取可复用逻辑的 hook
+```
+function FriendListItem(props) {
+    const isOnline = useFriendStatus(props.friend.id); // 使用自定义hook，直接获取hook的返回值。
+
+    return (
+        <li style={{ color: isOnline ? 'green' : 'black' }}>
+            {props.friend.name}
+        </li>
+    );
+}
+```
+自定义hook的代码和之前写法是一样的，完全等价。 <br />
+##### 自定义Hook是一种自然遵循Hook设计的**约定**，并不是React特性。
+必须以**use**开头，方便React检查函数中是否引用了hook，并且方便进行Hook规则的检查。
+
+### 两个组件中使用相同hook会共享state吗 ？
+不会，自定义Hook是一种重用状态逻辑的机制，其中所有state和副作用都是隔离的。
+
+### 多个Hook之间传递信息
+```
+const [recipientID, setRecipientID] = useState(1);
+const isRecipientOnline = useFriendStatus(recipientID);
+```
+
+### 总结
+- 基础 Hook
+    - useState
+    - useEffect
+    - useContext
+
+- 额外的 Hook
+    - useReducer
+    - useCallback
+    - useMemo
+    - useRef
+    - useImperativeHandle
+    - useLayoutEffect
+    - useDebugValue
