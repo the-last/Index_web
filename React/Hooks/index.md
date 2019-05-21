@@ -1,7 +1,7 @@
-## Hook
+# Hook
 Hook from 16.8 . u can use state even if no class.
 
-## useState  or State Hook
+## 1 useState  or State Hook
 ### 使用场景
 在编写函数组件并意识到需要向其添加一些 state时，像以前的做法是必须将其它转化为 class 才能使用state。<br />
 然后再函数组件中使用 函数式的 Hook 可以像class一样使用state。
@@ -32,7 +32,7 @@ Hook规范，Hook 只会在 React 组件中被调用 <br />
 当用 useState() 调用一个 Hook 时，它会读取当前的单元格（或在首次渲染时将其初始化）<br />
 然后把指针移动到下一个，这就是多个 useState() 调用会得到各自独立的本地 state 的原因。
 
-## useEffect  or Effect Hook
+## 2 useEffect  or Effect Hook
 
 ### 1、功能和作用
 useEffect 当前函数组件内充当生命周期函数的角色<br />
@@ -194,7 +194,7 @@ useEffect(() => {
 // 对于有清除操作的effect，同样适用。
 ```
 
-## useContext or  Context Hook
+## 3 useContext or  Context Hook
 接受 Context 作为参数，其他不能接受。
 ```
 const value = useContext(MyContext);
@@ -216,7 +216,7 @@ const [state, dispatch] = useReducer(reducer, initialArg, init);
 可以对触发**深更新**的组件做优化，向子组件传递dispatch而不是 回调函数。
 
 
-## Hooks 规则
+## 4 Hooks 规则
 hooks 本质上也是js函数，需要满足以下两个规则，可以参考linter插件 [hooks-linter](https://www.npmjs.com/package/eslint-plugin-react-hooks, 'hooks使用规范')<br />
 * 只在最顶层使用Hook
 不在循环，嵌套函数中使用Hook。能确保 Hook 在每一次渲染中都按照同样的顺序被调用<br />
@@ -245,7 +245,7 @@ useEffect(function persistForm() {
 React靠的是调用的顺序，调用顺序相同，渲染结果一样。
 
 
-## 自定义Hooks
+## 5 自定义Hooks
 ##### 通过自定义的Hook，可以将组建逻辑提取到可重用的函数中。
 ##### hooks本身就是函数。
 
@@ -321,7 +321,7 @@ const [recipientID, setRecipientID] = useState(1);
 const isRecipientOnline = useFriendStatus(recipientID);
 ```
 
-### 总结
+## 6 总结
 - 基础 Hook
     - useState
     - useEffect
@@ -335,3 +335,5 @@ const isRecipientOnline = useFriendStatus(recipientID);
     - useImperativeHandle
     - useLayoutEffect
     - useDebugValue
+
+**手动实践会有收获**
