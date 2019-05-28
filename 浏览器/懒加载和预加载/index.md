@@ -30,10 +30,55 @@
 对用户来讲，预加载会响应速度更快
 
 ### 实现方式
-- 1 css实现 js 实现方式
+- 1 css js 实现方式
 ```
-background: url(http://domain.tld/image-01.png) no-repeat -9999px -9999px; // 修改图片位置，视口不可见 需要展示时重新修改位置。
+background: url(http://domain.tld/image-01.png) no-repeat -9999px -9999px; 
+// js修改图片位置，视口不可见 需要展示时重新修改位置。
+// js设置响应时间，preloader 在window.onload 之后执行。
 ```
 
-- 2 
+- 2 js 实现
+```
+window.onload = function () {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://domain.baidu.com/preload.js');
+    xhr.send('');
+    xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://domain.baidu.com/preload.css');
+    let img1 = new Image();
+    img1.src = 'http://domain.baidu.com/preload.png';    // preload image.
+    document.querySelector('#img1').appendChild(img1);
+}
+// 以此方式预加载资源
+
+// 结合 ajax 实现
+```
+
+## 预加载 pk 懒加载
+#### 加载方式
+懒加载： 延迟加载、按需加载。缓解服务器压力。 <br />
+预加载： 提前加载、从缓存中获取资源进行渲染，提升用户体验。 <br />
+但会增加服务器压力；增加前端压力。 <br />
+改用神奇先进的**http 2.0**应用传输协议，多路复用，预加载的情况肯定能得以改善。
+
+#### 相关知识补充
+- 1 获取屏幕可视窗口大小
+```
+window.innerHeight                       // 标准浏览器及IE9+  
+
+document.documentElement.clientHeight    // 标准浏览器及低版本IE
+
+document.body.clientHeight               // 兼容低版本混杂模式
+
+```
+
+- 2 浏览器窗口顶部到文档顶部的距离， 也是滚动条滚动的距离
+```
+window.pageYoffset                       // 标准浏览器及IE9+
+
+document.documentElement.scrollTop       // 标准浏览器及IE低版本的标准模式
+
+document.body.scrollTop                  // 兼容低版本混杂模式
+
+```
 
