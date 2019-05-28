@@ -43,4 +43,28 @@ function throttle(method, delay){
 只是在行为上延缓了函数执行。更好的做法是执行次数也应该减少<br />
 
 ### 4 减少节流情况的响应次数
+在限定的时间间隔去执行相同响应函数，并不是所有事件都在延迟后执行。 <br />
+类似定期采集执行事件。 <br />
+不重复执行，定期间隔后执行。
+
+```
+function th(methods, delay, expries) {
+    let begin = Date.now();
+    let timer = null;
+    return function () {
+        var context = this, args = arguments;
+        var current = Date.now();
+        clearTimeout(timer);
+        if (current - begin > expries) {
+            methods.apply(context, args);
+            begin = current;
+        } else {
+            timer = setTimeout(() => {
+                methods.apply(context, args);
+            }, delay);
+        }
+    }
+}
+window.onscroll = th(callback, 200, 600); // 延迟 200ms 后执行，600ms 间隔收集一次执行事件
+```
 
