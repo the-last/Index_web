@@ -1,9 +1,9 @@
 const color = require('colors/safe');
 const Koa = require('koa');
 const Router= require('koa-router');
-
+// 配置接口处理路由
 const router = new Router();
-// 或者添加前缀
+// 路由前缀
 // const router = new Router({
 //    prefix: '/getversion'
 // });
