@@ -93,7 +93,9 @@ app.use(async (ctx) => {
     ctx.body= html;
 });
 ```
+
 koa-router写法上引入es6的**async/await**更直观。<br />
+
 可限制请求方式(methods)，比如 **allowedMethods** <br />
 allowedMethods 对允许请求的方式添加了限制 如果设置为GET，使用POST访问相同路径会报错。<br />
 [allowedMethods详解参考](https://github.com/ZijianHe/koa-router/tree/master#module_koa-router--Router+allowedMethods "方法主要说明")
