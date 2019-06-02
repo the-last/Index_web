@@ -9,6 +9,11 @@
 redux全局唯一一个state，区分容器组件、展示组件在全局内共同维护，redux有代码规范性优势。<br />
  view -> aciton -> reducer 的更新思路。
 
+### redux状态使用三原则
+- 单一数据源
+- store 不可以直接修改
+- 尽量使用纯函数修改
+
 ### redux三要素
 - Store 
 store发生改变会触发react 执行生命周期循环，直接驱动页面状态改变。 <br />
