@@ -11,7 +11,7 @@ console.log(typeof strangerUndefined === 'number') // true IE5.5~8
 #### 为什么用 一元运算符 void 0 ？
 因为 void 0 === undefined 恒等于。
 void运算符在js中 ，不管后面是数字几，只会返回单纯的 undefined
-void后面跟含有getter属性的函数，会进行调用
+void后面跟含有getter属性的函数，会进行调用执行语句，不会返回值。
 ```
 var dd = {
   a: 90,
