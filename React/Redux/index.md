@@ -2,8 +2,12 @@
 
 ### redux主要解决了什么问题
 
+- 组件间通信 共享数据
 官方文档提到，redux提供**可预测**状态管理。 主要 用于解决React组件间通信、组件间共享数据。 <br />
 主要包括api （store, action, reducer) . 
+
+- 通过修改store驱动 组件生命周期
+
 **优势**：代码更规范，区分容器组件和展示组件，参考redux-react connect的方法类似装饰器模式。<br />
 在用法、写法、多store管理上mobx会比redux更简洁，mobx可以使用类装饰器、函数装饰器封装store的class类方便全局调用。<br />
 redux全局唯一一个state，区分容器组件、展示组件在全局内共同维护，redux有代码规范性优势。<br />
