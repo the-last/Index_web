@@ -36,6 +36,7 @@
 * slot插槽
 * 生命周期
 * eventlop
+* 组件间通信
 
 #### React
 * setState原理及特点
