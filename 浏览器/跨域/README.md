@@ -256,6 +256,7 @@ Expose-Headers 可以在服务器响应里添加更多字段值，返回给浏�
 #### form表单事实上无法完成跨域，需要将表单转换成formData，使用ajax完成跨域
 [form表单序列化本质上是用的ajax完成跨域请求](https://www.jianshu.com/p/63d5f0f38708 "form表单序列化")
 #### form表单可以完成不同源的请求，单无法获取到返回结果，因为这可能违背浏览器同源限制的规定 ！ <br />
-#### 同源限制的本质是，浏览器不同意不同域名直接进行通信，不能有信息的交换；但不影响 script iframe link img 访问外部资源。
+
+#### [同源限制的本质是，浏览器不同意不同域名直接进行通信，不能有信息的交换](https://www.jianshu.com/p/28ff30668259 "同源策略")；但不影响 script iframe link img 访问外部资源
 
 
