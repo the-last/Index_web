@@ -136,23 +136,23 @@ app.get('/crossDomain', function (req, res) {
 
 #### CORS原理
 
-__CORS全称：cross origin resource sharing__ </br>
+__CORS全称：cross origin resource sharing__ <br />
 `理解成中文就是跨域的资源共享，共享跨域的资源。当
 需要请求其他域名下的资源，就需要CORS策略`
 
-__问题：__ 在浏览器和服务器之间，当浏览器根据域名访问到网站资源，</br>
-如果随后访问的内容不是媒体类型不能用标签获取，并且不在这个域名下，例如api接口</br>
-这个时候就需要跨域访问接口，浏览器允许标签进行跨域，但不允许xmlhttprequest对象进行跨域</br>
-跨域会受到浏览器的安全策略限制。</br>
-因为所有通过浏览器建立的网络连接，都是有浏览器内核创建的http/https请求。</br>
+__问题：__ 在浏览器和服务器之间，当浏览器根据域名访问到网站资源，<br />
+如果随后访问的内容不是媒体类型不能用标签获取，并且不在这个域名下，例如api接口<br />
+这个时候就需要跨域访问接口，浏览器允许标签进行跨域，但不允许xmlhttprequest对象进行跨域<br />
+跨域会受到浏览器的安全策略限制。<br />
+因为所有通过浏览器建立的网络连接，都是有浏览器内核创建的http/https请求。<br />
 
-__解决办法：__ 需要浏览器和服务器之间进行配合，浏览器向服务器询问，这个接口要跨域来访问你，是否同意？</br>
-如果服务器说这个域名过来的跨域请求我同意，你可以让它建立请求。</br>
-这时候，浏览器开始进行跨域访问，建立正常的ajax异步通信。</br>
-随后就会遇到 withCredentials 关于客户端验证信息的问题，是否需要身份识别，是否要携带cookie等，这个和正常的ajax配置一样，不用担心。</br>
+__解决办法：__ 需要浏览器和服务器之间进行配合，浏览器向服务器询问，这个接口要跨域来访问你，是否同意？<br />
+如果服务器说这个域名过来的跨域请求我同意，你可以让它建立请求。<br />
+这时候，浏览器开始进行跨域访问，建立正常的ajax异步通信。<br />
+随后就会遇到 withCredentials 关于客户端验证信息的问题，是否需要身份识别，是否要携带cookie等，这个和正常的ajax配置一样，不用担心。<br />
 
-这个过程的实现需要服务器进行访问的配置，浏览器会对服务器的这些配置进行分析，客户端并不能感觉到这个略复杂的协商过程。</br>
-客户端的浏览器对CORS策略的支持有一定版本的要求，目前主流浏览器基本都支持，IE10以下版本的IE不支持。</br>
+这个过程的实现需要服务器进行访问的配置，浏览器会对服务器的这些配置进行分析，客户端并不能感觉到这个略复杂的协商过程。<br />
+客户端的浏览器对CORS策略的支持有一定版本的要求，目前主流浏览器基本都支持，IE10以下版本的IE不支持。<br />
 
 #### CORS的兼容性
 
@@ -195,10 +195,10 @@ Content-Type: text/html; charset=utf-8
 
 ###### 预检
 
-CORS请求的预检请求 </br>
-在进行正式的http请求之前，进行的预检 </br>
-检查当前的跨域的origin是否在允许的名单里，需要哪些请求相关的信息等 </br>
-可以在发送ajax的请求中设置请求头 </br>
+CORS请求的预检请求 <br />
+在进行正式的http请求之前，进行的预检 <br />
+检查当前的跨域的origin是否在允许的名单里，需要哪些请求相关的信息等 <br />
+可以在发送ajax的请求中设置请求头 <br />
 ```
 var url = 'https://api.baidu.com';
 var xhr = new XMLHttpRequest();
@@ -228,11 +228,11 @@ Content-Type: text/plain
 - 3，服务端设置，Access-Controld 的几个关键字段
 
 ###### Access-Control-Allow-Origin
-必填字段，表示可以接受跨域请求的地址，可以指定 *，表示接受所有域名过来的请求，也可以设置指定域名。</br>
+必填字段，表示可以接受跨域请求的地址，可以指定 *，表示接受所有域名过来的请求，也可以设置指定域名。<br />
 需要使用记录跨域站点的cookie使用cookie访问跨域的站点时，需要在站点服务器制定允许的具体的域名。
 ###### Access-Control-Allow-Credentials
-可选字段，类型为Boolean，表示是否允许浏览器发送cookie，默认不发送，和同源的cookie设置和使用一样 </br>
-对应ajax请求对象中的 withCredentials. </br>
+可选字段，类型为Boolean，表示是否允许浏览器发送cookie，默认不发送，和同源的cookie设置和使用一样 <br />
+对应ajax请求对象中的 withCredentials. <br />
 同意浏览器发送cookie的另一个条件：
 ```
 var xhr = new XMLHttpRequest();
@@ -240,8 +240,8 @@ xhr.withCredentials = true;
 ```
 如果浏览器发出的请求没有设置这个字段，就算服务器上设置allow，也不会发送cookie。
 ###### Access-Control-Expose-Headers
-可选字段，用于添加response header 字段，默认的情况通过 getResponseHeader() 方法获取到</br>
-Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma 这6个字段信息 </br>
+可选字段，用于添加response header 字段，默认的情况通过 getResponseHeader() 方法获取到<br />
+Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma 这6个字段信息 <br />
 Expose-Headers 可以在服务器响应里添加更多字段值，返回给浏览器。
 ###### Access-Control-Request-Method
 必填字段，表明服务器支持的跨域请求方式
