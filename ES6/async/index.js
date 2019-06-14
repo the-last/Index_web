@@ -42,3 +42,32 @@ async function as () {
     console.log(3);
 }
 as(); // 1 2 未解决异步任务 8 3
+
+
+/** 
+ * 异步等待结果，以循环的形式从返回中取值
+ * for await 
+ * 循环使用 yield 生成器返回值
+ * */
+let listener = null;
+async function* somePromise() {
+    try {   
+        yield Promise.resolve(3);
+        yield new Promise(res => {setTimeout(() => {res(7)}, 300)});
+        yield Promise.resolve(10);
+        yield Promise.resolve(20);
+    } catch (error) {
+        console.log(error, '失败详情');
+    }
+}
+// async 一定会返回一个 Promise, await 不能声明在普通函数内, 所以在collect返回结果需要从Promise获取，或设置外层变量
+async function collect () {
+    let total = 0;
+    for await (let num of somePromise()) {
+        total += num;
+    }
+    listener = total;
+}
+console.log(listener);
+await collect();
+console.log(listener);
