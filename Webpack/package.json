@@ -20,7 +20,7 @@
       "server-babel": "cross-env NODE_ENV=test babel server/server.js --out-file server/server-babel.js",
       "server1-babel-start": "nodemon server/server-babel.js",
       "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --progress --config ./webpack.config.js",
-      "prod": "cross-env NODE_ENV=production webpack --inline --progress --config ./webpack.config.js",
+      "prod": "cross-env NODE_ENV=production webpack --sort-chunks-by --config ./webpack.config.js",
       "start": "npm run dev",
       "build": "npm run prod"
     },
