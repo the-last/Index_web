@@ -1,4 +1,4 @@
-## Redux
+## Redux用法
 
 ### redux主要解决了什么问题
 
@@ -19,7 +19,7 @@ redux全局唯一一个state，区分容器组件、展示组件在全局内共�
 - 尽量使用纯函数修改
 
 ### redux三要素
-- Store 
+#### **Store** <br />
 store发生改变会触发react 执行生命周期循环，直接驱动页面状态改变。 <br />
 和store有关的操作
 ```
@@ -29,7 +29,7 @@ subscribe(listener)
 replaceReducer(nextReducer)
 ```
 
-- Action
+#### **Action** <br />
 redux中改变store的唯一途径
 ```
 case TOGGLE_TODO:
@@ -45,8 +45,21 @@ case TOGGLE_TODO:
   })
 ```
 
-- Reducer
+#### **Reducer** <br />
 Action 只是表示会有一个事件发生，Reducer是描述具体如何发生。<br />
 每个Reducer负责管理全局的state中的一部分。每个reducer的state参数不同，分别对应负责的那部分数据变化。<br />
 不同种类的Reducer负责处理state数据中负责的一块数据。这样可能会有多个Reducer，为了管理方便redux提供了 combineReducers 。<br />
 
+## redux 中间件
+引入中间件， **处理callback回调和action动作之间的dispatch**
+```
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './reducers';
+
+const store = createStore(
+  reducer,
+  applyMiddleware(thunk)   //使用多个中间件可以用数组的形式，注意引入顺序中间件之间的依赖关系，例如redux-logger需要放在最后
+);
+
+```
