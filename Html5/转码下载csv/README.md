@@ -8,7 +8,7 @@ charCodeAt 返回 Unicode 编码范围是 0 - 65535 之间的整数 <br >
 ```
 ### - 解码 <br >
 ```
-String.fromCharCode(parseInt('T'.charCodeAt().toString(16), 16)); // 16进制转10  从新获取编码前的字符
+String.fromCharCode(parseInt('T'.charCodeAt().toString(16).slice(-4), 16)); // 16进制转10  从新获取编码前的字符
 ```
 ### Blob数据流 转 URL对象并下载
 ```
