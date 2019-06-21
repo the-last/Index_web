@@ -1,0 +1,28 @@
+.option-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 20px 0 0 2px;
+    padding: 0px;
+    .option-item {
+        position: relative;
+        flex: 1;
+        padding: 0px;
+        max-width: 250px;
+        min-width: 250px;
+        height: 100px;
+        border-radius: 3px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+        margin: 0px 10px 20px 0px;
+        list-style-type: none;
+        .icon {
+            box-sizing: border-box;
+            padding: 10px;
+            color: #6AC884;
+            font-size: 22px;
+            border: 0px;
+            width: 100px;
+        }
+
+    }
+}
