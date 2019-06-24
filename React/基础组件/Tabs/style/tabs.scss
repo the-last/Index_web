@@ -1,0 +1,210 @@
+ul,li,div {
+    margin: 0px;
+    padding: 0px;
+}
+.ui-tabs {
+    font-size: 16px;
+    background-color: white;
+    font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft Yahei', 'WenQuanYi Micro Hei', Arial, Verdana, sans-serif;
+}
+
+$contentColor: #303030;
+$activeColor: #1296DA;
+$bottomlineColor: #1296DA;
+$hoverColor: #87c1ea;
+
+
+
+
+@mixin tab($color) {
+    border-color: $color;
+    color: $color;
+    border-radius: 1px;
+    padding: 4px;
+    margin: 0px;
+    display: inline-block;
+    height: 50px;
+    line-height: 42px;
+    width: 70px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: color .3s cubic-bezier(.645, .045, .355, 1);
+}
+
+@mixin tab-posi(){
+    display: block;
+    height: 70px;
+    line-height: 70px;
+    width: 70px;
+    border: 0px;
+    cursor: pointer;
+}
+
+@mixin border($ps, $color){
+    @if $ps == 'top' {
+        border-bottom: 2px solid $color;
+    }
+    @if $ps == 'right' {
+        border-left: 2px solid $color;
+    }
+    @if $ps == 'left' {
+        border-right: 2px solid $color;
+    }
+    @if $ps == 'bottom' {
+        border-top: 2px solid $color;
+    }
+}
+
+@mixin tab-active($ps) {
+    color: $activeColor;
+    @include border($ps, $bottomlineColor);
+
+    &:hover {
+        color: $activeColor;
+        @include border($ps, $activeColor);
+    }
+}
+
+.ui-tabs-nav {
+    &-top {
+        display: block;
+    }
+    &-left {
+        float: left;
+    }
+    &-right {
+        float: right;
+    }
+    &-bottom {
+        display: block;
+    }
+}
+
+@mixin ui-tabs-content {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+}
+.ui-tabs-content {
+    &-top {
+        @include ui-tabs-content();
+        display: block;
+    }
+    &-left {
+        @include ui-tabs-content();
+        margin-left: 72px;
+    }
+    &-right {
+        @include ui-tabs-content();
+        margin-right: 72px;
+    }
+    &-bottom {
+        @include ui-tabs-content();
+        display: block;
+    }
+}
+
+.tabs {
+    &-bar-line {
+        display: block;
+        position: absolute;
+        width: 2px;
+        height: 100%;
+        
+        &-left {
+            right: 0px;
+            top: 0px;
+        }
+        &-top {
+            bottom: 0px;
+            left: 0px;
+        }
+        &-right {
+            left: 0px;
+            top: 0px;
+        }
+        &-bottom {
+            top: 0px;
+            left: 0px; 
+        }
+
+    }
+}
+
+.tabs {
+    &-bar {
+        display: block;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    &-tab-left {
+        @include tab-posi();
+        border-bottom: 0px;
+        border-right: 2px solid rgba(250,250,250,1);
+        &:hover {
+            color: $hoverColor;
+            border-bottom: 0px;
+            border-right: 2px solid $hoverColor;
+        }
+    }
+    &-tab-right {
+        @include tab-posi();
+        border-bottom: 0px;
+        border-left: 2px solid rgba(250,250,250,1);
+        &:hover {
+            color: $hoverColor;
+            border-bottom: 0px;
+            border-left: 2px solid $hoverColor;
+        }
+    }
+    &-tab-top {
+        @include tab-posi();
+        display: inline-block;
+        height: 50px;
+        line-height: 54px;
+        border-bottom: 2px solid rgba(250,250,250,1);
+        &:hover {
+            color: $hoverColor;
+            border-bottom: 2px solid $hoverColor;
+        }
+    }
+    &-tab-bottom {
+        
+        @include tab-posi();
+        display: inline-block;
+        height: 50px;
+        line-height: 42px;
+        border-top: 2px solid rgba(250,250,250,1);
+        &:hover {
+            color: $hoverColor;
+            border-top: 2px solid $hoverColor;
+        }
+    }
+
+    &-active-top {
+        @include tab-active('top')
+    }
+    &-active-left {
+        @include tab-active('left')
+    }
+    &-active-right {
+        @include tab-active('right')
+    }
+    &-active-bottom {
+        @include tab-active('bottom')
+    }
+
+    &-disabled {
+        @include tab(rgba(80,80,80,.5));
+        cursor: not-allowed;
+    }
+
+    &-content {
+        font-size: 32px;
+        color: $contentColor;
+    }
+}
+
