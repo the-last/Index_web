@@ -1,0 +1,23 @@
+{
+  "name": "ve-alert-",
+  "version": "1.0.1",
+  "description": "vue-alert",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-last/Vue-Alert.git"
+  },
+  "keywords": [
+    "alert",
+    "ve-alert"
+  ],
+  "author": "the_last",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-last/Vue-Alert/issues"
+  },
+  "homepage": "https://github.com/the-last/Vue-Alert#readme"
+}
