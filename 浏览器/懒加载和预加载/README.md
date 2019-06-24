@@ -61,24 +61,3 @@ window.onload = function () {
 但会增加服务器压力；增加前端压力。 <br />
 改用神奇先进的**http 2.0**应用传输协议，多路复用，预加载的情况肯定能得以改善。
 
-#### 相关知识补充
-- 1 获取屏幕可视窗口大小
-```
-window.innerHeight                       // 标准浏览器及IE9+  
-
-document.documentElement.clientHeight    // 标准浏览器及低版本IE
-
-document.body.clientHeight               // 兼容低版本混杂模式
-
-```
-
-- 2 浏览器窗口顶部到文档顶部的距离， 也是滚动条滚动的距离
-```
-window.pageYoffset                       // 标准浏览器及IE9+
-
-document.documentElement.scrollTop       // 标准浏览器及IE低版本的标准模式
-
-document.body.scrollTop                  // 兼容低版本混杂模式
-
-```
-
