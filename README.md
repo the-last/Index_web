@@ -1,8 +1,8 @@
-# web开发知识点总结小记
+# web 学习路线图
 
 ### 学习之路
 
-#### ES6
+#### [ES6](https://github.com/the-last/Index_web/tree/master/ES6)
 * 原型链
 * 作用域
 * 暂时性死区
@@ -21,7 +21,7 @@
 * 链表
 * async/await
 
-#### Webpack
+#### [Webpack](https://github.com/the-last/Index_web/tree/master/Webpack)
 * 模块
 * 打包原理
 * loader
@@ -30,7 +30,7 @@
 * source map
 * 新版区别
 
-#### Vue
+#### [Vue](https://github.com/the-last/Index_web/tree/master/Vue)
 * 数据更新原理
 * computed原理
 * nextTick
@@ -39,7 +39,7 @@
 * eventlop
 * 组件间通信
 
-#### React
+#### [React](https://github.com/the-last/Index_web/tree/master/React)
 * setState原理及特点
 * 生命周期
 * key
@@ -63,8 +63,11 @@
 
 #### html5
 * 拖拽
+* websocket
+* 增强表单
+* 
 
-#### 浏览器
+#### [浏览器](https://github.com/the-last/Index_web/tree/master/%E6%B5%8F%E8%A7%88%E5%99%A8)
 * 跨域方案
 * 缓存机制
 * cookie优缺点
@@ -72,15 +75,15 @@
 * DOM
 * BOM
 * 宏任务微任务
-* 
 
-#### 网络传输
+
+#### [网络传输](https://github.com/the-last/Index_web/tree/master/%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93)
 * TCP提升传输效率的方法
 * Http1.0 1.1
 * Http 2.0
 * Http 3.0
 
-#### Nodejs
+#### [Nodejs](https://github.com/the-last/Index_web/tree/master/Nodejs)
 * express
 * koa context/log
 * koa 中间件
