@@ -52,6 +52,26 @@ module.exports = {
 ```
 可以初始化很多个块chunk，也可以堆叠块 <br />
 
+### 3 loader用法
+
+**举例css-loader** 使用用法，webpack新版 3.0及以上 <br >
+在rules 内可以添加loader，每个loader有自己的输入和输出 输入一版为css、less、sass文件，输出一版为js文件 <br >
+webpack 主要功能是把 样式文件转换成webpack可以识别的 js文件， <br >
+css-loader的主要功能就是把css转为js，可以自动添加前缀，自动分块自动打包模块化样式， <br >
+less-loader sass-loader会把预处理类型的文件先处理成css文件， <br >
+在module中可以添加 use ，use中loader的顺序是处理预发布文件的顺序，从右往左一次递进，最后输出是js文件 <br >
+为了将打包后的样式做区分，可以给class名添加**hash**值做版本区分，添加**localIdentName**参数可以实现。 <br >
+```
+{
+    loader: "css-loader",
+    options: {
+        modules: true,
+        localIdentName: "[local]___[hash:base64:5]",
+        importLoaders: 1,
+    }
+}
+```
+
 ### 其他
 #### 3, 遇到的坑
 #### 3.1 npm 不能用
