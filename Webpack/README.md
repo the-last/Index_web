@@ -53,7 +53,7 @@ module.exports = {
 可以初始化很多个块chunk，也可以堆叠块 <br />
 
 ### 3 loader用法
-
+[css-loader官方配置](https://webpack.js.org/loaders/css-loader/#root)
 **举例css-loader** 使用用法，webpack新版 3.0及以上 <br >
 在rules 内可以添加loader，每个loader有自己的输入和输出 输入一版为css、less、sass文件，输出一版为js文件 <br >
 webpack 主要功能是把 样式文件转换成webpack可以识别的 js文件， <br >
