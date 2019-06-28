@@ -221,9 +221,19 @@ export default class InstanceStore
 }
 // computed 直接获取一个计算后的值。
 // 如果一个值需要根据某个state计算，并且也需要被观察则可以使用 @computed autorun 类似
+// autorun   用于执行一些和值变化有关的操作，比如异步请求，数据处理等
+// computed  用于根据已有的值，计算出新的值返回一个对观察值追踪的结果
 var ins = new InstanceStore();
 console.log('value form mobx computed', toJS(ins.getValue()))
 
+// autorun 在不需要继续使用的情况可以进行垃圾回收
+var numbers = observable([1,2,3]);
+var sum = computed(() => numbers.reduce((a, b) => a + b, 0));
+var disposer = autorun(() => console.log(sum.get()));   // '6'
+numbers.push(4);                                        // '10'
+
+disposer();
+numbers.push(5);                                        // 什么也不打印，因为disposer执行是不再对autorun reaction
 
 // 过期状态值方式如下
 var ins = new InstanceStore();
