@@ -204,6 +204,10 @@ let RectAngle = class Rect {
 - 以上两种类的声明方式都不会声明提前，一定要先声明。
 - 并且一次声明报错，类的名字会被写入内存，就是那个错误的类名也已经被占用。
 
+### constructor 是否是必填 ？
+*一个类必须有一个constructor方法！如果不是显示的声明一个constructor也会默默添加一个constructor*
+*一个class相当于一个函数，一定会有一个constructor，constructor会返回this可以修改默认返回，并在内部有supre方法继承父类*
+
 ### 2.2 类体及特征
 - 严格模式
 类的声明和表达式主体默认都在严格模式下执行，也是ES6的趋势。
