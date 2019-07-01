@@ -1,0 +1,26 @@
+upstream backup01server {
+    server 10.0.0.10:7777; weight = 5;
+    server 10.0.0.10:8888; weight = 5;  // 设置接口被访问所占比重
+    hash;
+    IP_hash;                            // 每一个访客，按照IP的hash结果分配，访客可以固定访问一个服务器
+    fair;                               // 表示响应快的优先分配
+    hash_method crc32;                  // hash 使用的算法
+}
+
+server {
+    listen 80;
+    server_name  localhost;
+    location / {
+        root html;
+        index index.html;
+    }
+    location /vserver {
+        root html;
+        index index.html;
+    }
+    location  /spirit {
+        root html;
+        index  index.html;
+        proxy_pass http://backup01server;
+    }
+}
