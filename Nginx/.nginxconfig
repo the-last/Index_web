@@ -24,3 +24,17 @@ server {
         proxy_pass http://backup01server;
     }
 }
+
+log_format  main:  '$remote_addr - $remote_user [$time_local] "$request"'
+                   '$status $body_bytes_sent "$http_referer"'
+                   '"$http_user_agent" "$http_x_forward_for"';
+
+server {
+    listen 3000;
+    server_name   abc.com;
+    location / {
+        root /home;
+        index index.html;
+    };
+    access_log logs/abc.access_log main;
+}
