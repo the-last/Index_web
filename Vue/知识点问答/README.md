@@ -64,5 +64,11 @@ this.$refs.xxx, 保险起见，可以写在mounted的nextTick内
 
 ## 8 跨组件双向绑定
 深层通信推荐  provide/inject  $attrs/$listeners
+[组件通信](https://github.com/the-last/Index_web/tree/master/Vue/Vue%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1)，
+Vue 的 prop传值是单向的，当父组件的属性变化时，将传导给子组件，但是不会反过来。这是为了防止子组件无意修改了父组件的状态——这会让应用的数据流难以理解。
 
-## 
+## 9 Vue-router 跳转和 location.href 有什么区别
+使用location.href='/url'来跳转，简单方便，会刷新页面，是对一个链接的重新加载，常用在跳转中 <br > 
+使用history.pushState('/url')，无刷新页面，静态跳转 <br >
+引进router，然后使用router.push('/url')来跳转，使用了diff算法，实现了按需加载，减少了dom的消耗。 <br >
+
