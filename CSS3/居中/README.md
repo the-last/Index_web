@@ -1,17 +1,61 @@
 ## 居中
 - 1 margin auto，text-align center
+```
+.outer1 {
+    margin: auto;
+    display: table;
+    width: 800px;
+    height: 500px;
+    text-align: center;
+}
+.inner1 {
+    display: table-cell;
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+```
 
-- 2 display flex align-self center
+- 2 display flex align-items justify-content
+```
+.outer2 {
+    display: flex;
+    width: 100%;
+    height: 500px;
+    align-items: center;      /*垂直*/
+    justify-content: center;  /*水平*/
+    text-align: center;
+    background-color: rgba(109, 192, 189, 0.5);
+}
+.inner2 {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
 
-- 3 display table-cell margin-left 一半
+```
 
-- 4 position absolute margin-left 一半
+- 3 position relative float left margin-left 一半
 
-- 5 inline-block text-align center
+- 4 百分比定位，定位百分比transform
+```
+.outer3 {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    text-align: center;
+    background-color: rgba(189, 192, 109, 0.5);
+}
+.inner3 {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
 
-- 6 position relative float left margin-left 一半
-
-- 7 百分比定位，百分比transform
+```
 
 ## transform 居中会比 margin-left 好么
 transform 的官方的定义是，允许旋转、平移、缩放、倾斜已知元素  <br />
