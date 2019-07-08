@@ -4,8 +4,9 @@ nodejs 后台是一种高并发多IO弱cpu的后台服务
 async/await 保证异步执行程序 <br />
 promise 保证异步的执行
 
-### koa2 常用中间件
-- use middleware **类似过滤器，在服务器和应用程序之间处理请求和响应。** 
+## koa2 中间件
+### 1 中间件逻辑顺序
+ use middleware **类似过滤器，在服务器和应用程序之间处理请求和响应。** 
 以简单的方式理解koa的级联调用方式，从最外层开始到最内曾逐级调用并返回。
 ```
 let koa = require('koa');
@@ -31,7 +32,7 @@ app.listen(3000);
 // 打印结果： 1 2 3 4 5 
 ```
 
-#### koa为什么会使用这种中间件模式呢 ？
+### 2 koa为什么会使用这种中间件模式呢 ？
 - koa 可以解决什么问题
 举个栗子，如果想获取请求穿过中间件的时间，需要执行一次回调callback。 <br />
 例如在 **express** 中,response-time的源码，通过监听header被写回 write out 的时候后触发回调函数计算时间。 <br />
@@ -45,13 +46,30 @@ next() 函数可以保留当前执行环境的能力，在调用next时，koa会
 这样就可以很好的规避掉callback的陷阱，这也是被定义为剥洋葱的原因。
 **总的来说，就是级联回调保持当前执行环境（其实就是 async、await的封装）**
 
-#### koa-常用的一些中间件
+### 3 koa-常用的一些中间件
 
-- koa-bodyparser
+#### 3.1 koa-bodyparser
 类似 express body-parser，koa有 koa-bodyparser <br />
 可以在代码中直接使用 ctx.request.body 进行获取POST请求参数，很方便。<br />
+```
+const Koa = require("koa");
+const bodyParser = require("koa-bodyparser");
+ 
+const app = new Koa();
+ 
+app.use(bodyParser());
+ 
+app.use(async (ctx, next) => {
+    if (ctx.path === "/" && ctx.method === "POST") {
+        // 使用中间件后 ctx.request.body 属性自动加上了 post 请求的数据
+        console.log(ctx.request.body);
+    }
+});
 
-- koa-router
+app.listen(3000);
+```
+
+#### 3.2 koa-router
 一般接口路由的写法。 <br />
 ```
 const Koa = require('koa');
@@ -108,8 +126,38 @@ app.use(router.allowedMethods({
 }));
 ```
 
+#### 3.3 koa-better-body
+相比 bodyparser 会有更好的 参数解析能力，可以提供upload文件上传功能，文件参数自动添加到了 fields 上。 <br >
+koa-better-body 的主要功能就是将表单上传的文件存入本地指定的文件夹下。 <br >
+```
+const Koa = require("koa");
+const betterBody = require("koa-better-body");
+const convert = require("koa-convert");
+ 
+// 可以将 koa1.x 版本的中间件转换成 koa2.x 版本使用
+app.use(convert(betterBody({
+    uploadDir: path.resolve(__dirname, "upload")
+})));
+
+```
+
+#### 3.4 koa-views
+服务端渲染页面的中间件，
+```
+// 加载模板
+app.use(views(path.join(__dirname, './views'), {
+    extension: 'ejs'
+}))
+app.use( async ( ctx ) => {
+    let title = 'hello koa2'
+    await ctx.render('index', {
+        title
+    })
+})
 
 
 
-### 参考
-[koa2简易后台项目](https://github.com/superalsrk/koa2-boilerplate "koa2后台项目举例")
+```
+
+#### 3.5 koa-static
+
