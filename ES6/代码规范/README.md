@@ -1,5 +1,5 @@
 ## es6 规范编写代码注意的地方、代码风格
-**基于es6规范的总结**
+**基于es6规范的总结** [AirBnb规范](http://airbnb.io/javascript/)
 
 ## 1 块作用域
 #### 1.1 let 取代 var   <br />
@@ -115,3 +115,58 @@ for (let item of map.entries()) {
 }
 ```
 
+## 7 数组
+字面值创建数组。 <br >
+
+```
+// 不合适
+someStack[someStack.length] = 'abracadabra';
+
+// 推荐
+someStack.push('abracadabra');
+
+// 不合适
+const len = items.length;
+const itemsCopy = [];
+let i;
+
+for (i = 0; i < len; i++) {
+  itemsCopy[i] = items[i];
+}
+
+// 推荐 扩展运算符 ...
+const itemsCopy = [...items];
+
+```
+## 8 解构赋值
+使用解构存取和使用多属性对象. **因为解构可以减少临时引用**<br />
+```
+  // 不合适
+  function getFullName(user) {
+    const firstName = user.firstName;
+    const lastName = user.lastName;
+
+    return `${firstName} ${lastName}`;
+  }
+
+  // 合适
+  function getFullName(obj) {
+    const { firstName, lastName } = obj;
+    return `${firstName} ${lastName}`;
+  }
+
+  // 推荐 在传参部分取值
+  function getFullName({ firstName, lastName }) {
+    return `${firstName} ${lastName}`;
+  }
+```
+对数组使用解构，因为解构数组有默认顺序。 <br >
+```
+// 不合适
+const first = arr[0];
+const second = arr[1];
+
+// 推荐
+const [first, second] = arr;
+
+```

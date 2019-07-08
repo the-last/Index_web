@@ -17,3 +17,4 @@
 * 算法
 * 链表
 * async/await
+* call/apply/bind
