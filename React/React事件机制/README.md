@@ -115,6 +115,7 @@ var ReactEventListener = {
 ```
 ### 2 存储事件
 在 **函数enqueuePutListener** 中会调用 putListener 存储事件。 <br >
+[react 15.3](https://lib.baomitu.com/react/15.3.2/react.js)
 ```
 /**
 * EventPluginHub用来存储React事件, 将listener存储到`listenerBank[registrationName][key]`
@@ -126,6 +127,7 @@ var ReactEventListener = {
 putListener: function (inst, registrationName, listener) {
 
 	// 找到React对象关键字，key的格式为'.nodeId'
+  // 这种获取关键字查询字典的方式只在react 15.3版本是这种写法 注意！其他版本不在用 EventPluginHub 这个参数
 	var key = getDictionaryKey(inst);
 
 	// 找到注册事件
