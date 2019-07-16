@@ -33,3 +33,5 @@ nginx停止
 7、偏好设定，打开方式修改为/bin/bash
 8、重新打开。
 
+## npm 清理缓存指令
+npm cache clean --force
