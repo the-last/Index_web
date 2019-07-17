@@ -160,4 +160,11 @@ app.use( async ( ctx ) => {
 ```
 
 #### 3.5 koa-static
+静态网页
+
+#### 3.6 connect-busboy
+解析content-type为多媒体类型的请求
+
+#### 3.7 koa2-cors
+处理跨域的请求，按条件做出回应，是否允许跨域。
 
