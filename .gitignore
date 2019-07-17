@@ -6,3 +6,5 @@ build
 mockup/
 .vscode/
 .history/
+.DS_Store
+.DS_Store/
