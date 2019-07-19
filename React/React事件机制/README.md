@@ -1,4 +1,19 @@
-## react 事件机制
+## 1 react 事件响应顺序
+react的事件响应顺序和原生js事件响应顺序略有不同。 <br >
+- 1 *react事件执行顺序是：* <br >
+**onClick -> onKeyDown -> onInput -> onChange -> onKeyUp** <br >
+
+- 2 *js 事件执行顺序(onchange 在光标失去焦点之后触发 )是：* <br >
+**onclick -> onkeydown -> oninput -> onkeyup -> onchange -> onblur** <br >
+
+- 3 原生事件和react 合成事件 执行顺序怎样的？ <br >
+首先DOM事件监听器被执行，然后事件继续冒泡至document，合成事件监听器再被执行 ! <br >
+原生事件和合成事件分别有自己的事件冒泡和捕获执行机制，合成事件触发基于统一的document反馈，和isPropagationStopped 标志位来决定后续监听器是否执行。 <br >
+冒泡是从节点最后传给document这个事件代理节点，会有明显的先后顺序,原生先响应 <br>
+捕获是document到目标节点，所以外层节点合成事件先响应，js原生事件直接响应，合成事件触发后响应<br >
+e.nativeEvent.stopImmediatePropagation 阻止合成事件与最外层document上的事件间的冒泡<br >
+
+## 2 react 事件机制
 react事件三个要素
 - 事件注册 **ReactEventListener** 将 事件 注册到document节点上，事件分发主要靠的是 dispatchEvent（触发事件）进行，向父节点遍历。 <br />
 - 事件触发 **ReactEventEmitter** 负责每个组件事件的执行。<br />
