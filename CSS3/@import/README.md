@@ -35,7 +35,7 @@ example:<br >
 - @import "foo.php";  // foo.php  导入为less文件<br >
 - @import "foo.css";  // 语句保持原样，导入为css文件<br >
 
-| 属性 | 作用 |
+| 属性 | 作用 | 释义 |
 | :------ | :------| :------ |
 | reference | 使用该less文件但是不输出它 | 使用@import (reference) 导入外部文件，导入的样式不会添加到编译输出，除非该样式被引用。 |
 | inline | 包括在源文件中输出，但是不作处理 | 当一个css文件可能无法被less所兼容时 |
