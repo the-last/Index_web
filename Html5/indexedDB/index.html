@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+</head>
+    
+<body>
+    <input type="text" id="name" placeholder="Name"><br/>
+    <input type="email" id="email" placeholder="Email"><br/>
+    <button id="addButton">增加一条</button>
+
+    <p>
+        <button id="delete">清除</button>
+    </p>
+
+    <p>
+        <button id="getStore">查找数据（列）</button>
+    </p>
+    
+</body>
+
+<script>
+    var db;
+    function indexedDBOk() {
+        return "indexedDB" in window;
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+    
+        if(!indexedDBOk) return;
+        
+        var openRequest = indexedDB.open("person", 1);
+    
+        openRequest.onupgradeneeded = function(e) {
+    
+            var thisDB = e.target.result;
+            if(!thisDB.objectStoreNames.contains("people")) {
+                
+                // 新建对象存储，相当于表，可以按照某个属性做为key,比如id
+                var os = thisDB.createObjectStore("people", { autoIncrement:true });
+    
+                // 新增索引，相当于列属性
+                os.createIndex("name", "name", {unique:false});
+                os.createIndex("email", "email", {unique:true});
+
+            }
+        }
+    
+        openRequest.onsuccess = function(e) {
+            db = e.target.result;
+        }
+    
+        openRequest.onerror = function(e) {
+            //Do something for the error
+        }
+    
+    },false);
+    
+    
+    function addPerson(e) {
+        var transaction = db.transaction(["people"],"readwrite");
+        //创建事务，指定表格对象
+        var store = transaction.objectStore("people");
+    
+        // 如果在创建表对象，设置了keyPath，此处需要指定 keyPath值
+        var person = {
+            name:name,
+            email:email,
+            created:new Date()
+        }
+    
+        // 新增一条数据，会返回一个执行结果的对象
+        var request = store.add(person);
+    
+       // 对异步的操作，增加监听事件失败或成功
+        request.onerror = function(e) {
+            alert("Error",e.target.error.name);
+        }
+        request.onsuccess = function(e) {
+            alert("Success !");
+        }
+    }
+    
+    
+    function getPeople(e) {
+        var transaction = db.transaction(["people"],"readonly");
+        var store = transaction.objectStore("people");
+        var index = store.index("name");
+    
+        // 
+        var range;
+        // if(name != "" && endname != "") {
+            // range = IDBKeyRange.bound(name, endname);
+        // } else if(name == "") {
+            // range = IDBKeyRange.upperBound(endname);
+        // } else {
+            // range = IDBKeyRange.lowerBound('');
+        // }
+    
+        var s = "";
+    
+        index.openCursor(range).onsuccess = function(e) {
+            var cursor = e.target.result;
+            if(cursor) {
+                
+                for(let field in cursor.value) {
+                    s+= field + " = " + cursor.value[field] + "----";
+                }
+                cursor.continue();
+            }
+            console.log('获取关联的条目：', s)
+        }
+
+
+
+        var index = store.index("nameIndex");
+            index.get('Byron').onsuccess=function(e){
+                var student=e.target.result;
+                console.log(student.id);
+            }
+    
+    }
+    
+    
+    //清空store
+    function deleteData(e) {
+    var transaction = db.transaction(["people"],"readwrite");
+    var store=transaction.objectStore("people");     
+        store.clear();
+    }
+
+    //列表查询
+    function getDataByKey(e) { 
+        // 对当前表进行遍历
+        db.transaction(["people"], "readonly").objectStore("people").openCursor().onsuccess = function(e) { 
+            var cursor = e.target.result; 
+            if(cursor) { 
+                console.log('遍历数据表');
+                for(var field in cursor.value) { 
+                    console.log(field);
+                    console.log(cursor.value[field]);
+                }
+                cursor.continue(); 
+            }
+        } 
+    }
+
+    //查询
+    function getDataByKey1(){
+        var name = document.querySelector("#nameSearch1").value;
+        if(name === "" ) return;
+    
+        var transaction = db.transaction(["people"],"readonly");
+        var store = transaction.objectStore("people");
+        var index = store.index("name");
+        var request = index.get(name);
+        
+                request.onsuccess=function(e){ 
+                    var result = e.target.result;
+                    console.log(result.email); 
+    
+                };
+    }
+    
+    
+    //更新
+    function getDataByKey2(e){
+     var name = document.querySelector("#nameSearch2").value;
+         if(name === "" ) return;
+    
+    var transaction = db.transaction(["people"],"readwrite");
+                var store=transaction.objectStore("people"); 
+    
+                var index = store.index("name");
+                var request=index.get(name); 
+    
+                request.onsuccess=function(e){ 
+                   var result = e.target.result;
+                   result.email=909;
+                    store.put(result); 
+                };
+    }
+</script>
+</html>
