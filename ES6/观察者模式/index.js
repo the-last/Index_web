@@ -59,9 +59,6 @@ class Subject {
 }
 
 class Observer {
-    constructor(props) {
-        super(props);
-    }
     update() {
         console.log('触发更新');
     }
