@@ -91,3 +91,8 @@ configuration.resolve.extensions[0] should not be empty 在配置文件中，exp
 
 #### 3.3 特殊的URL-loader
 webpack解析 图片和 字体 文件，，必须使用 url-loader
+
+
+## 采坑
+
+- webpack 4.34版本 hash值格式 **md5:contenthash:hex:8** ，webpack 3.11版本 **contenthash:7**
