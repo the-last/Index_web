@@ -1,4 +1,13 @@
-## Nginx 启动重启
+## Nginx 
+### 修改配置
+```
+cd /usr/local/etc/nginx
+vim nginx.conf
+nginx -t
+nginx -s reload
+
+```
+### 启动重启
 ```
 进入安装路径  cd /usr/local/Cellar/nginx/1.13.10bin 
 启动 sudo ./nginx
@@ -32,6 +41,19 @@ nginx停止
 6、删除这个文件里面的一些指令，也就是你在步骤2中看到的指令
 7、偏好设定，打开方式修改为/bin/bash
 8、重新打开。
+
+## Git git pull *
+git pull origin master:master <br>
+当前分支不是master，又想把远程master”同步”到本地master，又不想使checkout切换到master分支；这时你就可以使用git pull origin master：master <br>
+<br>
+git pull origin master <br>
+把远程主分支同步到当前分支 <br>
+<br>
+git pull <br>
+git branch -vv  查看分支的关联关系 <br>
+执行从关联的分支更新代码到本地 <br>
+**git pull** = **git fetch** + **git merge** <br >
+<br>
 
 ## npm 清理缓存指令
 npm cache clean --force
