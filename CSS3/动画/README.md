@@ -110,6 +110,7 @@ Animation 属性值比 Transition多了3个
     animation-fill-mode: forwards;
     animation-direction: normal;
     animation-iteration-count: 3;
+    animation-play-state: paused;
 ```
 Animation 的简写形式
 ```
