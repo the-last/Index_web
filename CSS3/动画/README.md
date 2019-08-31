@@ -88,7 +88,7 @@ img {
 ```
 ### 1.2 动画触发方式
 
-#### $\color{rgb(255,0,0)}{:hover，:focus，:active，:checked，@media 媒体查询(横屏竖屏..)}$ 
+<font color="#0099ff" font-size="18px" face="黑体">:hover，:focus，:active，:checked，@media 媒体查询(横屏竖屏..)</font>
 
 ### 1.3 兼容性，浏览器基本都兼容
 ![explor](./imgs/transition-explorer.JPG)
