@@ -1,4 +1,15 @@
 # CSS3动画 分析总结
+## 0 注意事项
+
+#### 注意：时间设置有要求，大致如下
+**第一个时间是持续时长，第二个参数是等待时间**
+
+ - 持续时长，等待时长 有顺序 <br >
+ - 只写一个时，只有持续时长，等待时长为空 <br >
+ - 写入无位置限制 ，可以和其他属性值交叉写 <br >
+ - 不能超过2个时间点 ，否则报错失效 <br >
+
+
 
 ## 1 Transition 
 ### 1.1 动画执行方式
@@ -42,6 +53,38 @@ img {
     transition-timing-function: ease;  //执行速度模式
 }
 
+  .transition-forever {                  //hover离开时触发新动画并设置一个很大的延迟时间
+    display: block;
+    transition: .5s 999999s;
+    width: 100px;
+    height: auto;
+    &:hover {
+      width: 50px;
+      height: auto;
+      transition: .5s width ease-in-out .5s;  //transition未必写在触发事件的外面，满足transition和属性变化即可
+    }
+  }
+  .transition-switch {
+    display: block;                       //行内样式元素无动效
+    transition: all 1s ease-in-out;
+    width: 100px;
+    height: auto;
+    &:hover {
+      transform: scale(.5);
+    }
+  }
+  .transition-auto {
+    display: block;
+    transition: width 1s ease-in-out;     //width过度到auto，会立即执行动画
+    padding: 1px;
+    width: 80px;
+    height: auto;
+    &:hover {
+      width: auto;
+    }
+  }
+
+
 ```
 ### 1.2 兼容性，浏览器基本都兼容
 ![explor](./imgs/transition-explorer.JPG)
@@ -52,15 +95,29 @@ transition并不是对所有属性都有动画效果，以下属性改变不会�
 参考： http://oli.jp/2010/css-animatable-properties/
 例如:
 ```
-diplay:none -> display:block;
-background: url('a.jpg') -> background: url('b.jpg');
-height: auto;
-font-size: 12px -> 16px;
-text-indent: 1em -> 2em;
+    diplay:none -> display:block;
+    background: url('a.jpg') -> background: url('b.jpg');
+    height: auto;
+    font-size: 12px -> 16px;
+    text-indent: 1em -> 2em;
 ```
 - 需要时间触发，动画不是自动发生
 - transition执行过程不能重复，没有infinite
 - 优点，Transition 用法简洁，多个属性可以用 all 关键字 transition: all 1s。
+
+### 1.4 Transition动画api
+transition提供 **transitionend**
+```
+this.$nextTick(() => {
+    let target = document.getElementById('transition-switch');
+    target.addEventListener('transitionend', (e) => {
+        console.log('finish---', e);
+    }, false); // 可以在父级监听动画结束事件、
+})
+```
+
+
+
 ## 2 Animation
 ### 2.1 基本用法
 Animation需要指定一个周期和动画名
@@ -105,6 +162,7 @@ div:hover {
 }
 ```
 ### 2.4 animation全部属性值
+
 Animation 属性值比 Transition多了3个
 ```
     animation-fill-mode: forwards;
@@ -112,6 +170,7 @@ Animation 属性值比 Transition多了3个
     animation-iteration-count: 3;
     animation-play-state: paused;
 ```
+
 Animation 的简写形式
 ```
 div:hover {
