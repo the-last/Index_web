@@ -86,10 +86,14 @@ img {
 
 
 ```
-### 1.2 兼容性，浏览器基本都兼容
+### 1.2 动画触发方式
+
+#### $\color{rgb(255,0,0)}{:hover，:focus，:active，:checked，@media 媒体查询(横屏竖屏..)}$ 
+
+### 1.3 兼容性，浏览器基本都兼容
 ![explor](./imgs/transition-explorer.JPG)
 
-### 1.3 Transition用法注意及局限
+### 1.4 Transition用法注意及局限
 - 属性限制
 transition并不是对所有属性都有动画效果，以下属性改变不会引起动效
 参考： http://oli.jp/2010/css-animatable-properties/
@@ -105,8 +109,9 @@ transition并不是对所有属性都有动画效果，以下属性改变不会�
 - transition执行过程不能重复，没有infinite
 - 优点，Transition 用法简洁，多个属性可以用 all 关键字 transition: all 1s。
 
-### 1.4 Transition动画api
-transition提供 **transitionend**
+### 1.5 Transition动画api
+transition提供
+$\color{rgb(255,0,0)}{transitionend}$  <br >
 ```
 this.$nextTick(() => {
     let target = document.getElementById('transition-switch');
