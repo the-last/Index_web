@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>栅格 布局</title>
+    <style>
+    .contain {
+        display: grid;
+        width: 50%;
+        height: 500px;
+        /* grid-template-columns: repeat(3, 33.33%) */
+        /* grid-template-columns: 30% 30% 30%; */
+        grid-template-rows:  30% 30% 30% 30%;
+        /* fraction 片段单位fr 大小是总宽度-实际宽度的剩余部分 被fr个数平分 */
+        grid-template-columns: 80px minmax(80px, 1fr) 1fr;
+    }
+    .child {
+        border: 1px solid #33aaff;
+    }
+    .item {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 4;
+    }
+    .item-span {
+        grid-column-start: span 2;
+    }
+    p {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        color: blue;
+        font-weight: 500;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <div class="child item-span"><p>1</p></div>
+        <div class="child"><p>2</p></div>
+        <div class="child"><p>3</p></div>
+        <div class="child"><p>4</p></div>
+        <div class="child"><p>5</p></div>
+        <div class="child"><p>6</p></div>
+        <div class="child"><p>7</p></div>
+        <div class="child"><p>8</p></div>
+        <div class="child"><p>9</p></div>
+    </div>
+</body>
+</html>
