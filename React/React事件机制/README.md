@@ -249,6 +249,11 @@ var EventPluginHub = {
 
 ```
 
+## 踩坑记录 --
+- onFocus onBlur 在react事件中默认冒泡，原生不会冒泡
+- react 的捕获事件 也是在dom冒泡事件之后
+- onFocus 在onClick 事件之前，原生事件也是
+
 <br >
 <br >
 <br >
