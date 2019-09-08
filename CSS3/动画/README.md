@@ -43,7 +43,8 @@ transition-timing-function
     ease-out：    减速
     ease-in-out： 先加速后减速
     cubic-bezier: 自定义速度曲线
-
+举例：
+transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 <!-- 完整写法 -->
 
 img {
