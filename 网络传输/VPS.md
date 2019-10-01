@@ -17,7 +17,7 @@ sudo vim /etc/shadowsocks-libev/config.json
 sudo systemctl start shadowsocks-libev
 
 ```
-还有其他配置可以在 [这里查看](https://github.com/shadowsocks/shadowsocks-libev, 'ss-server') <br>
+还有其他配置可以在 [这里查看](https://github.com/shadowsocks/shadowsocks-libev 'ss-server') <br>
 
 检查服务是否已启动 <br>
 ```
@@ -25,7 +25,7 @@ ps -ef | grep ss-server
 ```
 
 ### 搭建客户端
-[客户端安装](https://github.com/shadowsocks/ShadowsocksX-NG/releases/, 'ss-client') <br>
+[客户端安装](https://github.com/shadowsocks/ShadowsocksX-NG/releases/ 'ss-client') <br>
 
 下载最新版本的.zip文件 安装dmg <br >
 安装完成 <br >
