@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Css3</title>
+
+    <style>
+        .jishuqi {
+            counter-reset: row;
+        }
+        .counter-container {
+            overflow: hidden;
+            margin: 3px;
+            font-size: 20px;
+            line-height: 50px;
+            text-align: center;
+            color: #ff0909;
+            background: #415481;
+            counter-reset: box;
+            counter-increment: row;
+        }
+        .counter-container:before {
+            content: "row: " counter(row);
+            float: left;
+        }
+        .counter {
+            width: 50px;
+            height: 50px;
+            margin: 3px;
+            background: aqua;
+            float: left;
+            counter-increment: box;
+        }
+        .counter:before {
+            content: counter(row)"."counter(box);
+        }
+    </style>
+</head>
+
+<body>
+    <h2>css 计数器的使用</h2>
+    <div class="jishuqi">
+        <section class="counter-container">
+            <div class="counter"></div>
+            <div class="counter"></div>
+        </section>
+        <section class="counter-container">
+            <div class="counter"></div>
+            <div class="counter"></div>
+            <div class="counter"></div>
+        </section>
+        <section class="counter-container">
+            <div class="counter"></div>
+            <div class="counter"></div>
+            <div class="counter"></div>
+            <div class="counter"></div>
+        </section>
+    </div>
+</body>
+
+</html>
