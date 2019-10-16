@@ -60,25 +60,29 @@ function getkey() {
     };
     Object.prototype.d = 4;
     Object.defineProperty(obj, 'e', {
+        configurable: true,
         writable: false,
-        emutable: false,
+        enumerable: false,
         value: 5
     });
     Object.defineProperty(obj, 'f', {
+        configurable: true,
         writable: false,
-        emutable: true,
+        enumerable: true,
         value: 6
     });
     const symbolg = Symbol('g');
     const symbolh = Symbol('h');
     Object.defineProperty(obj, symbolg, {
+        configurable: true,
         writable: false,
-        emutable: false,
+        enumerable: false,
         value: 7
     });
     Object.defineProperty(obj, symbolh, {
+        configurable: true,
         writable: false,
-        emutable: true,
+        enumerable: true,
         value: 8
     });
 
@@ -95,3 +99,30 @@ function getkey() {
     console.log('-- keys: ', Object.keys(obj));
     
 }
+/***
+ * 
+ -- for-in: a
+ -- hasOwnProperty:  a
+ -- for-in: b
+ -- hasOwnProperty:  b
+ -- for-in: c
+ -- hasOwnProperty:  c
+ -- for-in: f
+ -- hasOwnProperty:  f
+ -- for-in: d
+ -- getOwnPropertyNames:  (5) ["a", "b", "c", "e", "f"]
+ -- getOwnPropertyDescriptor:  undefined (可获取对象属性的具体配置，总共是6个)
+ -- getOwnPropertySymbols:  (2) [Symbol(g), Symbol(h)]
+ -- keys:  (4) ["a", "b", "c", "f"]
+ */
+
+/**
+
+    - for-in 遍历可枚举属性 + prototype 属性 <br >
+    - hasOwnProperty ，遍历可枚举属性 <br >
+    - getOwnPropertyNames()  返回可枚举属性和不可枚举属性，不包括prototype属性，不包括symbol类型的key <br >
+    getOwnPropertyDescriptor
+    - getOwnPropertySymbols()  返回symbol类型的key属性，不关心是否可枚举 <br >
+    - object.keys() ， 遍历可以枚举属性 <br >
+
+*/
