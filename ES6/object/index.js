@@ -46,3 +46,52 @@ const obj = {
     name: 'San Francisco',
     [getKey('enabled')]: true,  // 可变key提前声明
 };
+
+/**
+ * 对象对key的获取方式
+ * 
+*/
+
+function getkey() {
+    let obj = {
+        a: 1,
+        b: 2,
+        c: 3
+    };
+    obj.prototype.d = 4;
+    Object.defineProperty(obj, 'e', {
+        writable: false,
+        emutable: false,
+        value: 5
+    });
+    Object.defineProperty(obj, 'f', {
+        writable: false,
+        emutable: true,
+        value: 6
+    });
+    const symbolg = new Symbol('g');
+    const symbolh = new Symbol('h');
+    Object.defineProperty(obj, symbolg, {
+        writable: false,
+        emutable: false,
+        value: 7
+    });
+    Object.defineProperty(obj, symbolh, {
+        writable: false,
+        emutable: true,
+        value: 8
+    });
+
+    console.log()
+    for (let key in obj) {
+        console.log('-- for-in:', key);
+        if (obj.hasOwnProperty(key)) {
+            console.log('-- hasOwnProperty: ', key);
+        }
+    }
+    console.log('-- getOwnPropertyNames: ', Object.getOwnPropertyNames(obj));
+    console.log('-- getOwnPropertyDescriptor: ', Object.getOwnPropertyDescriptor(obj));
+    console.log('-- getOwnPropertySymbols: ', Object.getOwnPropertySymbols(obj));
+    console.log('-- keys: ', Object.keys(obj));
+    
+}
