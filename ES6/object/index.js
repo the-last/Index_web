@@ -69,8 +69,8 @@ function getkey() {
         emutable: true,
         value: 6
     });
-    const symbolg = new Symbol('g');
-    const symbolh = new Symbol('h');
+    const symbolg = Symbol('g');
+    const symbolh = Symbol('h');
     Object.defineProperty(obj, symbolg, {
         writable: false,
         emutable: false,
