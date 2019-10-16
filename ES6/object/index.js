@@ -58,7 +58,7 @@ function getkey() {
         b: 2,
         c: 3
     };
-    obj.prototype.d = 4;
+    Object.prototype.d = 4;
     Object.defineProperty(obj, 'e', {
         writable: false,
         emutable: false,
