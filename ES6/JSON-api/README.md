@@ -27,3 +27,8 @@ const newParse = JSON.parse(string, (key, val) => {
     }
 })
 ```
+
+### 注意
+JSON序列化，**对对象的Symbol类型key不会被输出！** <br>
+JSON序列化，**对正则的RegExp的类型会返回{}** <br >
+可以另做处理。
