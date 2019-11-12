@@ -118,3 +118,20 @@ Array.prototype.myMap = function(cb) {
 }
 ```
 
+## Array 数组empty
+```
+var arr = [];
+arr[9] = 10;
+for(let i in arr) {
+    console.log(i)
+}
+// 9， 只遍历出最后一个
+arr.length;
+// 10
+console.log(arr);
+// [empty,...., 10]
+// 含有 empty 空值
+```
+使用**hasOwnProperty**可以判断当前值是否是 empty，然后判断是否继续进行遍历。 <br >
+
+
