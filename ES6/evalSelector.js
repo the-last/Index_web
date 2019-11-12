@@ -103,7 +103,7 @@ function statisticsKeywordsCount (keys, str) {
 }
 
 // 处理传参
-function find
+function find(){}
 
 const strTest = `function findParamsInitTypeAndHaveKeywords (str) {
     let types = ['let', 'var', 'const'];
