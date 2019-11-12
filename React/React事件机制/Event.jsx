@@ -1,13 +1,39 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import * as A from '../../utils/a';
+console.log(A, '开始引入 A ')
+
+console.log('--------------------------------------')
+const C = require('../../utils/c')
+console.log(C, '开始引入 C ')
 
 class EventReact extends Component {
     constructor(){
         super();
         this.state= {
-            inputValue: ''
+            inputValue: '',
+            count: 0
         }
         this.inputnode = '';
+        this.button = ''
+        setTimeout(() => {
+            this.setState({
+                count: this.state.count + 20
+            });
+            console.log(this.state.count, '---20')
+        },0);
+    }
+    componentWillMount() {
+        setTimeout(() => {
+            this.setState({
+                count: this.state.count + 1
+            });
+            console.log(this.state.count, '---1')
+            this.setState({
+                count: this.state.count + 1
+            });
+            console.log(this.state.count, '---2')
+        }, 0);
     }
     componentDidMount() {
         const $parent = ReactDOM.findDOMNode(this)
@@ -17,6 +43,33 @@ class EventReact extends Component {
         $parent.addEventListener('click', this.onParentDOMClick, false)
         $child.addEventListener('click', this.onChildDOMClick, false)
 
+        // setTimeout(() => {
+            this.setState({
+                count: this.state.count + 1
+            });
+            console.log(this.state.count, '---3')
+            this.setState({
+                count: this.state.count + 1
+            });
+            console.log(this.state.count, '---3')
+            this.setState({
+                count: this.state.count + 1
+            });
+            console.log(this.state.count, '---4')
+        // }, 0);
+
+        this.button.addEventListener('click', () => {
+            this.setState({
+                count: this.state.count + 1
+            });
+            this.setState({
+                count: this.state.count + 1
+            });
+            this.setState({
+                count: this.state.count + 1
+            });
+            console.log(this.state.count, '---5')
+        });
     }
 
     onParentDOMClick = () => {
@@ -66,13 +119,30 @@ class EventReact extends Component {
     onliClick = (flag) => {
         console.log(`${flag} 个被点击`);
     }
+    localEvent = () => {
+        this.setState({
+            count: this.state.count + 1
+        });
+        this.setState({
+            count: this.state.count + 2
+        });
+        this.setState({
+            count: this.state.count + 1
+        });
+        console.log(this.state.count, '---6');
+    }
 
     render() {
+        console.log('rendered: ', this.state.count);
         return (
             <div
                 onFocus={this.focusEventParent}
                 onBlur={this.blurEventParent}
             >
+                <button
+                    ref={item => {this.button = item}}
+                    id="local"
+                    onClick={this.localEvent}>本地事件</button>
                 <input
                     ref={node => this.inputnode = node}
                     value={this.state.inputValue}
