@@ -23,11 +23,11 @@ class CompileRouter {
     // 返回没有子组件的 Route 结构
     compilerNochild(nochild_object) {
         const { path, component } = nochild_object;
-        let router_nochild_template = `
-            <Route
-                path="${path}"
-                component={${component}}
-            />`;
+        let router_nochild_template =
+`\n<Route
+    path="${path}"
+    component={${component}}
+/>`;
         return router_nochild_template;
     }
     // 返回有子组件的 Route 结构
@@ -40,13 +40,13 @@ class CompileRouter {
                 return this.compilerNochild(item);
             }
         }): '';
-        let router_child_template = `
-            <Route
-                path="${path}"
-                component={${component}}
-            >
-            ${childrenCompiler}
-            </Route>`;
+        let router_child_template =
+`\n<Route
+    path="${path}"
+    component={${component}}
+>
+${childrenCompiler}
+</Route>`;
 
         return router_child_template;
     }
@@ -90,7 +90,7 @@ class CompileRouter {
             console.log('写入路由配置报错：', '\n', err.stack);
         });
     }
-}
+}p
 
 
 var compiler = new CompileRouter(routeConfigs);
