@@ -138,6 +138,68 @@ function debounce(func, wait, immediate) {
 #### 第一版
 使用时间戳触发
 ```
+function throttle(func, wait) {
+    var context, args;
+    var previous = 0; // 初始的时间点，也是关键的时间点
 
+    return function() {
+        var now = +new Date();
+        context = this;
+        args = arguments;
+        if (now - previous > wait) {
+            func.apply(context, args);
+            previous = now;
+        }
+    }
+}
+// 在开始触发时，会立即执行一次； 如果最后一次没有超过 wait 值，则不触发。
 ```
 
+#### 第二版
+使用定时器，由定时器决定定义下次的定时器
+```
+function throttle(func, wait){
+    var context, args, timeout;
+    return function() {
+        context = this;
+        args = arguments;
+        if(!timeout) {
+            timeout = setTimeout(function(){
+                func.apply(context, args);
+                timeout = null;
+            }, wait);
+        }
+    }
+}
+// 首次不会立即执行，最后一次会执行，和用时间戳的写法互补。
+```
+
+#### 第三版
+**结合 定时器写法 && 时间戳写法**
+```
+function throttle(func, wait) {
+
+    var args, context, timeout, previous = 0;
+    return function () {
+        args = arguments;
+        context = this;
+        var now = +new Date();
+        var remaining = wait - (now - previous);
+        if (remaining <= 0 && remaining > wait) {
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+            previous = now;
+            func.apply(context, args);
+        } else if (!timeout) {
+            timeout = setTimeout(function(){
+                previous = now;
+                func.apply(context, args);
+                clearTimeout(timeout);
+                timeout = null;
+            }, wait);
+        }
+    }
+}
+```
