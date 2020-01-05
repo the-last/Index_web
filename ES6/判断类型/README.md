@@ -22,13 +22,36 @@ foo instanceof Foo;           // true
 
 - 继承关系中的用法
 ```
-function Aoo(){} 
+function Aoo(){} ,
 function Foo(){} 
 Foo.prototype = new Aoo();         // 原型继承
  
 var foo = new Foo();
 foo instanceof Foo                 // true 
 foo instanceof Aoo                 // true
+```
+
+- 多继承关系中的用法
+```
+function Aoo(){this.a = 10}
+function Boo(){this.b = 20}
+function Foo(){this.c = 30} 
+Foo.prototype = new Aoo();
+Foo.prototype = new Boo();
+
+var foo = new Foo();
+console.log(foo, foo.a, foo.b, foo.c);
+// Foo {c: 30} undefined 20 30
+// new Boo() 覆盖 new Aoo()
+
+// 构造函数
+function Parent1(){this.b = 20}
+function Parent2(){this.c = 30}
+function Child(){Parent1.call(this); Parent2.call(this); this.a = 10}
+
+var c = new Child();
+console.log(c.a, c.b, c.c)
+// 10 20 30
 ```
 
 - 复杂用法(想不到吧？)
