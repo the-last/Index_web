@@ -1,0 +1,11 @@
+node_modules
+build
+dist
+*.log
+.idea
+.DS_Store
+mockup/
+.vscode/
+.history/
+.DS_Store
+.DS_Store/
