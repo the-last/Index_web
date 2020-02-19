@@ -7,7 +7,7 @@
     //1关键字 2 变量名 3 属性名 4 方法名 用一个object表示
 */
 var aim_chart_global = [];
-var getType = par => Object.prototype.toString.call(par).split(' ')[1].split(']')[0];
+var getType = par => Object.prototype.toString.call(par).split('object ')[1].split(']')[0];
 var combinKeywords = function (right) {
     for (let word of right) {
         aim_chart_global.push(word);
