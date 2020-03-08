@@ -1,0 +1,36 @@
+<html>
+<head></head>
+<body>
+    <div id="father" style="height:100px; overflow:hidden">//这两个属性是必须加上的
+        <div id="son5">
+            我是第一行<br>
+            我是第二行<br>
+            我是第三行<br>
+            我是第四行<br>
+            。。。。。<br>
+            我是第N行<br>
+        </div>
+        <div id="son2"></div>
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    var scrollSpeed = 100;//值越大，滚动的越慢
+    son2.innerHTML = son5.innerHTML;
+
+    function ScrollMarquee() {
+        if (son2.offsetTop - father.scrollTop <= 0) {
+            father.scrollTop -= son5.offsetHeight;
+        }
+        else {
+            father.scrollTop++;
+        }
+        // console.log(father.scrollTop)
+    }
+    // ScrollMarquee()
+    var ScrollTime = setInterval(ScrollMarquee, scrollSpeed);
+    father.onmouseover = function () { clearInterval(ScrollTime); };//鼠标放在上面停止滚动
+    father.onmouseout = function () { ScrollTime = setInterval(ScrollMarquee, scrollSpeed); };//鼠标离开，重新滚动
+</script>
