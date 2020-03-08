@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS 处理图片</title>
+    <style>
+        div {
+            width: 50%;
+            background-color: cornflowerblue;
+            border: 1px solid #999;
+        }
+        .div-contain {
+            width: 50px;
+            height: 30px;
+            margin: 100px auto;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url('http://img0.imgtn.bdimg.com/it/u=3233232895,1305949017&fm=26&gp=0.jpg');
+        }
+        .div-conver {
+            width: 50px;
+            height: 30px;
+            margin: 100px auto;
+            background-size: cover;
+            background-image: url('http://img0.imgtn.bdimg.com/it/u=3233232895,1305949017&fm=26&gp=0.jpg');
+        }
+        .div-50 {
+            width: 50px;
+            height: 30px;
+            margin: 100px auto;
+            background-size: 50% 50%;
+            background-image: url('http://img0.imgtn.bdimg.com/it/u=3233232895,1305949017&fm=26&gp=0.jpg');
+        }
+        .div-center-cover {
+            width: 50px;
+            height: 30px;
+            margin: 100px auto;
+            border: 10px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-image: url('http://img0.imgtn.bdimg.com/it/u=3233232895,1305949017&fm=26&gp=0.jpg');
+        }
+    </style>
+</head>
+<body>
+    <div>
+        contain
+        <div class="div-contain"></div>
+        cover
+        <div class="div-conver"></div>
+        50%
+        <div class="div-50"></div>
+        center-cover
+        <div class="div-center-cover"></div>
+    </div>
+</body>
+</html>

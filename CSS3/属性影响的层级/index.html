@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>边角效果</title>
+    <style>
+
+        .backgroundorborder {
+            background-color: #e15671;
+            border: 2px solid rgba(12,34,56,.9);
+            width: 600px;
+            height: 600px;
+            text-align: right;
+        }
+
+        .negativeZIndex {
+            position: relative;
+            z-index: -1;
+            background-color: aquamarine;
+            width: 900px;
+            height: 900px;
+            text-align: right;
+        }
+
+        .blockbox {
+            background-color: brown;
+            width: 500px;
+            height: 500px;
+            text-align: right;
+            display: block;
+        }
+
+        .floatbox {
+            background-color: blueviolet;
+            float: right;
+            width: 400px;
+            text-align: right;
+            display: inline-block;
+        }
+
+        .inlinebox {
+            display: inline-block;
+            background-color: blue;
+            width: 300px;
+            height: 300px;
+            text-align: right;
+        }
+
+        .boxZIndex0 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background-color: chartreuse;
+            width: 200px;
+            height: 200px;
+            text-align: right;
+        }
+
+        .boxZIndexPositive {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background-color:cornflowerblue;
+            width: 100px;
+            height: 100px;
+            text-align: right;
+        }
+
+
+    </style>
+</head>
+
+<body >
+    <div class="backgroundorborder">
+        background border 的颜色
+        <div class="negativeZIndex">
+            普通盒子模型 z-index -1
+
+        </div>
+        <div class="blockbox">
+            普通盒子模型
+            
+        </div>
+        <div class="floatbox">
+            浮动盒子模型
+            
+        </div>
+        <div class="inlinebox">
+            行内盒子模型
+            <div class="boxZIndex0">
+                普通盒子模型 z-index 0
+                
+            </div>
+            <div class="boxZIndexPositive">
+                普通盒子模型 z-index 1
+            </div>
+        </div>
+    </div>
+    
+</body>
