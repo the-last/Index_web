@@ -180,26 +180,24 @@ function throttle(func, wait){
 ```
 function throttle(func, wait) {
 
-    var args, context, timeout, previous = 0;
-    return function () {
-        args = arguments;
-        context = this;
-        var now = +new Date();
-        var remaining = wait - (now - previous);
-        if (remaining <= 0 && remaining > wait) {
-            if (timeout) {
-                clearTimeout(timeout);
-                timeout = null;
-            }
-            previous = now;
+    var timer = null;
+    var startTime = Date.now();  
+
+    return function(){
+        var curTime = Date.now();
+        var remaining = wait-(curTime-startTime); 
+        var context = this;
+        var args = arguments;
+
+        clearTimeout(timer);
+
+        if(remaining<=0){ 
             func.apply(context, args);
-        } else if (!timeout) {
-            timeout = setTimeout(function(){
-                previous = now;
-                func.apply(context, args);
-                clearTimeout(timeout);
-                timeout = null;
-            }, wait);
+            
+            startTime = Date.now();
+
+        }else{
+            timer = setTimeout(fun, remaining);  // 如果小于wait 保证在差值时间后执行
         }
     }
 }
