@@ -50,6 +50,7 @@ function debounce(func, wait) {
 
 #### 第二版
 首次触发事件执行，之后再开始执行防抖逻辑。
+注意使用时，不用重复执行这个函数，**本身返回的函数**才有防抖功能。
 ```
 function debounce(func, wait, immediate) {
     var timeout;
@@ -58,20 +59,23 @@ function debounce(func, wait, immediate) {
         var args = arguments;
         
         if(timeout) clearTimeout(timeout);
-        // 是否需要在第一次触发事件的时候就执行
+        // 是否在某一批事件中首次执行
         if (immediate) {
-             var callNow = !timeout;
-             timeout = setTimeout(function() {
-                 timeout = null;
-                 func.apply(context, args)
-             }, wait);
-             if (callNow) {
-                 func.apply(context, args)
-             }
+            var callNow = !timeout;
+            timeout = setTimeout(function() {
+                timeout = null;
+                func.apply(context, args)
+                immediate = true;
+            }, wait);
+            if (callNow) {
+                func.apply(context, args)
+            }
+            immediate = false;
         } else {
-             timeout = setTimeout(function() {
-                 func.apply(context, args);    
-             }, wait);
+            timeout = setTimeout(function() {
+                func.apply(context, args);
+                immediate = true;
+            }, wait);
         }
     }
 }
@@ -193,7 +197,7 @@ function throttle(func, wait) {
 
         if(remaining<=0){ 
             func.apply(context, args);
-            
+
             startTime = Date.now();
 
         }else{
