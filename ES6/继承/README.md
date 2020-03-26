@@ -39,6 +39,7 @@ function Parent (name) {
     this.name = name;
     this.car = ['area','auto'];
 }
+Parent.prototype.getName = function(){}
 
 function Child (name) {
     Parent.call(this, name);
@@ -46,11 +47,13 @@ function Child (name) {
 var child1 = new Child('haha');
 var child2 = new Child('heihei');
 
+child1.getName(); // 报错 getName 不是函数，因为getName是undefined。
+
 child1.push('bmw');
 child2.car;  //  area auto
 
 ```
-- 缺点：方法不能继承，call对应constructor，不能继承prototype的复制。
+- 缺点：原型方法没有继承，call对应constructor
 
 ### 1.3 组合式
 
@@ -103,6 +106,15 @@ var child2 = new Child('heihei');
 child2.getinfo(); // name: heihei + car； area autp
 child2.car.push('bmw');
 child1.getinfo(); // name: haha + car: area auto
+
+
+function create(obj) {
+  function F() {}
+  F.prototype = obj
+  return new F()     
+  // 返回prototype上有obj的对象实例。
+
+}
 ```
 - 缺点： 基本上完美了
 
