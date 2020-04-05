@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form表单提交后-自动填充问题</title>
+    <style>
+        body {
+            margin-bottom: 200px;
+        }
+        h3 {
+            margin-top: 20px;
+            color: rgb(137, 68, 202);;
+        }
+    </style>
+    <script>
+        /**
+         * 两种阻止默认提交的写法：
+         * 1，onsubmit回调事件 或 input/button 按钮的type改为 submit并按钮添加点击事件
+         *    函数在调用时传入event，在函数执行中，加上 event.preventDedault ()
+         * 
+         * 2，在 onsubmit回调函数中写上 "return getForm()"
+         *    在对应的回调函数中返回bool值，如果为false不执行默认的提交。
+         * 
+         * 获取表单的值方式：
+         *    document.forms[0]["name值"].value
+         *    document.forms[0]["id值"].value
+        */
+        function getForm (e, flag) {
+            e.preventDefault();
+            let form = document.forms[flag];
+            console.log(form && form.name.value, '-- name ')
+            console.log(form && form['form_name'] && form['form_name'].value, '-- id 有下划线写法')
+            console.log(form && form['form2name'] && form['form2name'].value, '-- id 不带下划线')
+        }
+    </script>
+</head>
+<body>
+    <h1 style="color: blueviolet;"> 不用AutoComplete添加预选项后续，而是通过浏览器自带的表单数据记忆功能来完成。 </h1>
+    <h1 style="color: blueviolet;"> 想保留name并且不需要预选项可以添加 auto-complete属性off，或 auto-complete属性 new-password。 </h1>
+
+    <h3> - 有name属性</h3>
+    <div>
+        <p>
+            原生form表单 <span style="color: green;">有name属性</span><br><br>
+            浏览器会根据表单项的name值，记录并保存表单数据，在表单提交后，<br><br>
+            下次输入框 onFocus 之后，浏览器会给出输入历史的预选项。
+        </p>
+        <form onsubmit="getForm(event, 0)">
+            <input name="name" type="text">
+            <input name="age"  type="text">
+            <input name="password" type="password">
+            <input type="submit" value="提交">
+        </form>
+    </div>
+
+    <h3> - 没有name属性  也没有id属性</h3>
+
+    <div>
+        <p>
+            原生form表单 <span style="color: red;">没有</span> name属性，<br><br>
+            没有name属性的表单项，在表单提交后,浏览器无法保存对表单提交的记录，<br><br>
+            下次onFocus之后，无法给出输入历史的预选提示。
+        </p>
+        <form onsubmit="getForm(event, 1)">
+            <input type="text">
+            <input type="text">
+            <input type="password">
+            <input type="submit" value="提交">
+        </form>
+    </div>
+
+    <h3> - 没有name属性 有id属性</h3>
+    <div>
+        <p>
+            原生form表单 <span style="color:darkorange;">没有name属性，有id属性</span><br><br>
+            <span style="color:rgb(216, 64, 165);">写法上是 form的id + "_" + item的id作为表单项的id</span>
+            <br> <br>
+            这种写法也可以保留输入历史预选项。
+            
+        </p>
+        <form id="form" onsubmit="getForm(event, 2)">
+            <input id="form_name" type="text">
+            <input id="form_age" type="text">
+            <input id="form_password" type="password">
+            <input type="submit" value="提交">
+        </form>
+    </div>
+
+    <h3> - 没有name属性 有id属性，但 id写法不同</h3>
+    <div>
+        <p>
+            原生form表单 <span style="color:darkorange;">没有name属性，有id属性</span><br><br>
+            <span style="color:rgb(216, 64, 165);">没有 "_" 拼接 , 随意写id值</span>
+            <h4 style="color:rgb(216, 64, 165);">这种写法也可以保留输入历史预选项。</h4>
+        </p>
+        <form id="form2" onsubmit="getForm(event, 3)">
+            <input id="form2name" type="text">
+            <input id="age" type="text">
+            <input id="form2password" type="password">
+            <input type="submit" value="提交">
+        </form>
+        <h4 style="color:rgba(214, 20, 20, 0.788);"> 
+            因此，id值的写法，不影响浏览器的预选功能。 （弄清楚这个问题，主要是看antd中用了统一格式，排除误解。）<br>
+            只要在表单中有id属性或者name属性，浏览器就能有依据的保留预选项！ <br>
+            并且在当前页面中有 name或id 重名时，两个输入框的输入历史记录会合并，预选项合并！
+        </h2>
+    </div>
+</body>
+</html>
